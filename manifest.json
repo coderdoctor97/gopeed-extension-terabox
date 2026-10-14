@@ -1,0 +1,179 @@
+{
+  "name": "terabox",
+  "author": "Satya",
+  "title": "Satya TeraBox Downloader",
+  "description": "Download TeraBox share links (terabox.com / terabox.app / 1024terabox.com / teraboxlink.com and other mirrors) directly with Gopeed. Resolves the files of a share (folders included), signs direct CDN download links and keeps them fresh so downloads run with many connections. Needs your TeraBox login cookie (ndus): TeraBox only issues download links to signed-in sessions.",
+  "icon": "icon.png",
+  "version": "1.0.0",
+  "scripts": [
+    {
+      "event": "onResolve",
+      "match": {
+        "urls": [
+          "*://terabox.com/*",
+          "*://*.terabox.com/*",
+          "*://terabox.app/*",
+          "*://*.terabox.app/*",
+          "*://terabox.fun/*",
+          "*://*.terabox.fun/*",
+          "*://terabox.club/*",
+          "*://*.terabox.club/*",
+          "*://teraboxapp.com/*",
+          "*://*.teraboxapp.com/*",
+          "*://teraboxlink.com/*",
+          "*://*.teraboxlink.com/*",
+          "*://teraboxshare.com/*",
+          "*://*.teraboxshare.com/*",
+          "*://teraboxurl.com/*",
+          "*://*.teraboxurl.com/*",
+          "*://terasharelink.com/*",
+          "*://*.terasharelink.com/*",
+          "*://terafileshare.com/*",
+          "*://*.terafileshare.com/*",
+          "*://teraboxdownloader.com/*",
+          "*://*.teraboxdownloader.com/*",
+          "*://1024tera.com/*",
+          "*://*.1024tera.com/*",
+          "*://1024tera.cn/*",
+          "*://*.1024tera.cn/*",
+          "*://1024terabox.com/*",
+          "*://*.1024terabox.com/*",
+          "*://4funbox.com/*",
+          "*://*.4funbox.com/*",
+          "*://4funbox.co/*",
+          "*://*.4funbox.co/*",
+          "*://mirrobox.com/*",
+          "*://*.mirrobox.com/*",
+          "*://nephobox.com/*",
+          "*://*.nephobox.com/*",
+          "*://momerybox.com/*",
+          "*://*.momerybox.com/*",
+          "*://tibibox.com/*",
+          "*://*.tibibox.com/*",
+          "*://freeterabox.com/*",
+          "*://*.freeterabox.com/*",
+          "*://gibibox.com/*",
+          "*://*.gibibox.com/*",
+          "*://goaibox.com/*",
+          "*://*.goaibox.com/*",
+          "*://dubox.com/*",
+          "*://*.dubox.com/*"
+        ]
+      },
+      "entry": "release/index.js"
+    },
+    {
+      "event": "onStart",
+      "match": {
+        "labels": ["terabox"]
+      },
+      "entry": "release/index.js"
+    },
+    {
+      "event": "onError",
+      "match": {
+        "labels": ["terabox"]
+      },
+      "entry": "release/index.js"
+    },
+    {
+      "event": "onDone",
+      "match": {
+        "labels": ["terabox"]
+      },
+      "entry": "release/index.js"
+    }
+  ],
+  "settings": [
+    {
+      "name": "cookie",
+      "title": "TeraBox cookie (ndus)",
+      "description": "Required for downloading. Log in at https://www.terabox.app, open DevTools → Application → Cookies → copy the value of \"ndus\" (a full \"Cookie:\" header line also works). TeraBox only signs download links for logged-in sessions.",
+      "type": "string",
+      "required": false,
+      "value": ""
+    },
+    {
+      "name": "password",
+      "title": "Default share password",
+      "description": "Used for password-protected shares when the link has no ?pwd= parameter.",
+      "type": "string",
+      "required": false,
+      "value": ""
+    },
+    {
+      "name": "mirror",
+      "title": "API mirror",
+      "description": "\"auto\" uses the domain of the pasted link first and then falls back to the other first-party domains. Pick one explicitly if your network blocks some of them.",
+      "type": "string",
+      "required": false,
+      "value": "auto",
+      "options": [
+        {
+          "label": "Auto",
+          "value": "auto"
+        },
+        {
+          "label": "www.terabox.app",
+          "value": "www.terabox.app"
+        },
+        {
+          "label": "www.terabox.com",
+          "value": "www.terabox.com"
+        },
+        {
+          "label": "www.1024terabox.com",
+          "value": "www.1024terabox.com"
+        },
+        {
+          "label": "www.1024tera.com",
+          "value": "www.1024tera.com"
+        },
+        {
+          "label": "www.teraboxapp.com",
+          "value": "www.teraboxapp.com"
+        }
+      ]
+    },
+    {
+      "name": "apiBase",
+      "title": "External resolver API (optional)",
+      "description": "Base URL of a self-hosted Trauso/Terabox-DL compatible resolver (exposes /api/get-info and /api/get-download). Leave empty to talk to TeraBox directly with your cookie.",
+      "type": "string",
+      "required": false,
+      "value": ""
+    },
+    {
+      "name": "maxFiles",
+      "title": "Max files per share",
+      "description": "Safety limit when a share contains large folders.",
+      "type": "number",
+      "required": false,
+      "value": 200
+    },
+    {
+      "name": "folderDepth",
+      "title": "Folder depth",
+      "description": "How many levels of sub-folders to walk.",
+      "type": "number",
+      "required": false,
+      "value": 5
+    },
+    {
+      "name": "ua",
+      "title": "User-Agent",
+      "description": "Override the browser User-Agent used for TeraBox requests (leave empty for the built-in Chrome UA).",
+      "type": "string",
+      "required": false,
+      "value": ""
+    },
+    {
+      "name": "fingerprint",
+      "title": "Chrome TLS fingerprint",
+      "description": "Present a Chrome TLS fingerprint to TeraBox (helps against the anti-bot wall). Disable only if requests start failing.",
+      "type": "boolean",
+      "required": false,
+      "value": true
+    }
+  ]
+}

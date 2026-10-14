@@ -1,0 +1,59 @@
+{
+  "root": true,
+  "env": {
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "gopeed": "readonly",
+    "MessageError": "readonly",
+    "__gopeed_setFingerprint": "readonly",
+    "fetch": "readonly",
+    "setTimeout": "readonly",
+    "clearTimeout": "readonly",
+    "AbortController": "readonly",
+    "console": "readonly",
+    "process": "readonly"
+  },
+  "rules": {
+    "no-constant-condition": [
+      "error",
+      {
+        "checkLoops": false
+      }
+    ],
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "test/**/*.mjs",
+        "scripts/**/*.mjs"
+      ],
+      "env": {
+        "node": true,
+        "es2022": true
+      },
+      "globals": {
+        "Response": "readonly",
+        "Headers": "readonly",
+        "Request": "readonly",
+        "URL": "readonly",
+        "URLSearchParams": "readonly",
+        "fetch": "readonly"
+      }
+    }
+  ]
+}

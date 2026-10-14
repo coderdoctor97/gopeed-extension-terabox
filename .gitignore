@@ -1,0 +1,4 @@
+node_modules/
+.DS_Store
+*.log
+# release/ (the compiled bundle) is committed on purpose: Gopeed installs straight from the git repository

@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - name: Bundle in git must match the sources
+        run: |
+          npm run check-bundle
+          git diff --exit-code --stat -- release/ || {
+            echo "::error::release/index.js is out of date — run 'npm run build' and commit it"; exit 1; }
